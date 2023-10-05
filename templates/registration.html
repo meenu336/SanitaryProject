@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Your head section remains unchanged -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <!--<link rel="stylesheet" href="{% static 'css/registration.css'%}">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cad1ca;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("plant12.jpg");
+        }
+
+        .registration-container {
+            background-color: #efeaea;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .registration-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-input {
+            margin: 10px 0;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .register-button {
+            background-color: #4158d0;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 0;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .register-button:hover {
+            background-color: #3146a7;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="registration-container">
+
+        <h2><center>Registration</center></h2>
+        <form class="registration-form" action="#" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <input class="form-input" type="text" name="username" id="username" placeholder="Username" required>
+            <span class="error-message" id="username-error"></span>
+            <input class="form-input" type="email" name="email" id="email" placeholder="Email" required>
+            <span class="error-message" id="email-error"></span>
+            <input class="form-input" type="password" name="password" id="password" placeholder="Password" required>
+            <span class="error-message" id="password-error"></span>
+            <input class="form-input" type="password" name="confirm_password" id="confirm-password"
+                placeholder="Confirm Password" required>
+            <span class="error-message" id="confirm-password-error"></span>
+            <button class="register-button" type="submit">SignUp</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+    <script>
+        var usernameInput = document.getElementById('username');
+        var usernameError = document.getElementById('username-error');
+        usernameInput.addEventListener('input', function() {
+            validateUsername(usernameInput.value);
+        });
+
+        var emailInput = document.getElementById('email');
+        var emailError = document.getElementById('email-error');
+        emailInput.addEventListener('input', function() {
+            validateEmail(emailInput.value);
+        });
+
+        var passwordInput = document.getElementById('password');
+        var confirmPasswordInput = document.getElementById('confirm-password');
+        var passwordError = document.getElementById('password-error');
+        var confirmPasswordError = document.getElementById('confirm-password-error');
+
+        passwordInput.addEventListener('input', function() {
+            validatePassword(passwordInput.value);
+        });
+
+        confirmPasswordInput.addEventListener('input', function() {
+            validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+        });
+
+        function validateUsername(username) {
+            // Your username validation code remains unchanged
+            usernameError.textContent = "";
+
+            if (username.length < 6) {
+                usernameError.textContent = "Username should be at least 6 characters long.";
+                return false;
+            }
+
+            if (!/[A-Z]/.test(username)) {
+                usernameError.textContent = "Username should contain at least one uppercase letter.";
+                return false;
+            }
+
+            if (!/[a-z]/.test(username)) {
+                usernameError.textContent = "Username should contain at least one lowercase letter.";
+                return false;
+            }
+
+            if (!/\d/.test(username)) {
+                usernameError.textContent = "Username should contain at least one number.";
+                return false;
+            }
+
+            if (/\s/.test(username)) {
+                usernameError.textContent = "Username should not contain spaces.";
+                return false;
+            }
+
+            if (/[^A-Za-z0-9]/.test(username)) {
+                usernameError.textContent = "Username should not contain special characters.";
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateEmail(email) {
+            emailError.textContent = "";
+            var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Enter a valid email address.";
+            }
+            if (/[A-Z]/.test(email)) {
+                emailError.textContent = "Enter valid email address.";
+            }
+        }
+
+        function validatePassword(password) {
+            passwordError.textContent = "";
+            var hasUppercase = /[A-Z]/.test(password);
+            var hasLowercase = /[a-z]/.test(password);
+            var hasDigit = /\d/.test(password);
+            var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            if (password.length < 6 || !hasUppercase || !hasLowercase || !hasDigit || !hasSpecialChar) {
+                passwordError.textContent = "Password should be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+            }
+        }
+
+        function validateConfirmPassword(password, confirmPassword) {
+            confirmPasswordError.textContent = "";
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Passwords do not match.";
+            }
+        }
+
+        function validateForm() {
+            var isValid = true;
+            var password = passwordInput.value;
+            var confirmPassword = confirmPasswordInput.value;
+
+            validatePassword(password);
+            validateConfirmPassword(password, confirmPassword);
+
+            if (passwordError.textContent || confirmPasswordError.textContent) {
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Form is valid, you can submit the form here if needed
+                alert("Successfully registered!");
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+
+</html>
