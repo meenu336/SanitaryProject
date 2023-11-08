@@ -1,0 +1,247 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adminpage.css">
+    <title>Online Sanitary Ware Shop Admin</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 20px;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .welcome {
+            font-weight: bold;
+        }
+        
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .content {
+            display: flex;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar li {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        /* Add space between list items and style as boxes with colors */
+        .sidebar li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ddd;
+        }
+        
+        /* Style specific list items differently */
+        .sidebar li:nth-child(1) {
+            background-color: #ff9999; /* Add Products */
+        }
+        
+        .sidebar li:nth-child(2) {
+            background-color: #66b3ff; /* View Products */
+        }
+        
+        .sidebar li:nth-child(3) {
+            background-color: #99ff99; /* Analytics */
+        }
+        
+        .sidebar li:nth-child(4) {
+            background-color: #ffcc99; /* My Orders */
+        }
+        
+        .sidebar li:nth-child(5) {
+            background-color: #ffcc00; /* Partners */
+        }
+        
+        .sidebar li:nth-child(6) {
+            background-color: #ccffcc; /* Calendar */
+        }
+        
+        .sidebar li:nth-child(7) {
+            background-color: #ffccff; /* Users */
+        }
+        
+        .sidebar li:nth-child(8) {
+            background-color: #cc99ff; /* Sales */
+        }
+        
+        .sidebar li:nth-child(9) {
+            background-color: #ff6666; /* Orders Received */
+        }
+        
+        .sidebar li:nth-child(10) {
+            background-color: #66cc66; /* Add Product Here */
+        }
+        
+        .sidebar li:nth-child(11) {
+            background-color: #ff9933; /* View Your Products */
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .sidebar-button {
+            background-color: #ddd;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .sidebar-button:hover {
+            background-color: #ccc;
+        }
+        .sidebar ul li a {
+            text-decoration: none; /* Remove underline from anchor elements */
+            color: inherit; /* Use the default text color for the links */
+        }
+
+        /* Add styles for the logout button */
+.logout-btn {
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn .btn {
+    background-color: #ff3333; /* Red color for the logout button */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none; /* Remove underline from the anchor element */
+    border-radius: 5px;
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.logout-btn .btn:hover {
+    background-color: #ff6666; /* Darker red color on hover */
+}
+
+/* Remove underline from navigation links */
+.nav-link {
+    text-decoration: none;
+}
+
+/* Style the navigation links as buttons */
+.nav-link {
+    margin-right: 10px; /* Add margin between navigation links */
+    padding: 10px 20px;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    color: #3498db;
+    transition: background-color 0.3s ease;
+}
+
+/* Change button background color on hover */
+.nav-link:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Add space between Welcome, Admin and navigation buttons */
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.welcome {
+    margin-right: 10px; /* Add margin between Welcome, Admin and navigation buttons */
+}
+
+        
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            
+            <div class="profile">
+                <!--<img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">-->
+                <a href="#" class="nav-link">Home</a>
+                <span class="welcome">Welcome, Stock Manager</span>
+            </div>
+            
+            <div class="logout-btn">
+                <a href="{% url 'logout' %}" class="btn">Logout</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="sidebar">
+            <h2>Options</h2>
+            <ul>
+               
+                <li><a href="{% url 'addproduct' %}">Add Products</a></li>
+                <li><a href="{% url 'viewproduct' %}">View Products</a></li>
+                <!--<button class="sidebar-button"><a href="{% url 'addproduct' %}">Add Products</a></button>-->
+                <!--<li><a href="{% url 'editproduct' %}">Edit Products</a></li>-->
+                <li>My Orders</li>
+                <li>Partners</li>
+                <li>Calendar</li>
+                <li>Users</li>
+                <li>Sales</li>
+                <li>Orders Received</li>
+                <li>Add Product Here</li>
+                <li>View Your Products</li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <!-- Content for orders received, add product here, view your products -->
+            
+            
+        </div>
+    </div>
+</body>
+
+</html>

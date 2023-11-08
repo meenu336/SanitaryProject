@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        li::before {
+            content: "\2022";
+            color: #333;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                <div class="product-container">
+                    <img src="{{ item.product.product_image.url }}" alt="{{ item.product.product_name }} Image" width="100">
+                    <div class="product-details">
+                        <h2>{{ item.product.product_name }}</h2>
+                        <p class="product-sale_price">{{ item.product.sale_price }}</p>
+                        <p class="product-price">{{ item.product.price }}</p>
+                        <p class="product-discount">{{ item.product.discount }}</p>
+                        <p class="product-price">Price: ${{ item.product.price }}</p>
+                        <p class="product-availability">Availability: {{ item.product.quantity }} in stock</p>
+                        {% comment %} <div class="product-rating">
+                            {% for i in item.product.rating|get_range %}
+                                <span class="star">&#9733;</span>  {# Use your own star symbol or icon #}
+                            {% endfor %}
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                <button class="remove-button" data-product-id="{{ item.product.id }}">Remove</button>
+            </li>
+        {% empty %}
+            <li>Your cart is empty.</li>
+        {% endfor %}
+    </ul>
+    <button class="place-order-button">Place Order</button>
+    <script>
+        $(document).ready(function () {
+            // When the "Remove" button is clicked
+            $(".remove-button").click(function () {
+                var productId = $(this).data("product-id");
+                var $removeButton = $(this); // Cache the button element
+        
+                $.post("/remove_from_cart/" + productId + "/", function (data) {
+                    if (data.success) {
+                        // Remove the item from the cart visually
+                        $removeButton.closest("li").remove();
+                        
+                        // Optionally, you can reload the cart or update the view here
+                        // Example: window.location.reload();
+                    }
+                });
+            });
+        });
+    </script>        
+</body>
+
+</html>

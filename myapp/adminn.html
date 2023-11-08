@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'adminpage.css' %}">
+    <title>Online Sanitary Ware Shop Admin</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    .navbar {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .profile {
+        display: flex;
+        align-items: center;
+    }
+    
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background-color: #f4f4f4;
+        float: left;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .sidebar ul li a {
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .sidebar ul li a:hover {
+        color: #007bff;
+    }
+    
+    .content {
+        margin-left: 250px;
+        padding: 20px;
+    }
+    
+    .footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    .sidebar ul li a {
+        color: #fff;
+        background-color: #007bff;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        transition: background 0.3s ease;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .sidebar ul li a:hover {
+        background-color: #0056b3;
+    }
+    
+    /* Remove underline from the link */
+.logout-button {
+    text-decoration: none;
+}
+
+/* Style the link as a button */
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db; /* Button background color */
+    color: #fff; /* Button text color */
+    border: 1px solid #2980b9; /* Button border color */
+    border-radius: 5px; /* Button border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Button box shadow */
+    transition: background-color 0.3s ease;
+}
+
+/* Change button background color on hover */
+.logout-button:hover {
+    background-color: #2980b9; /* Hover background color */
+}
+
+/* Remove underline from the link */
+.logout-button {
+    text-decoration: none;
+}
+
+/* Style the link as a button with red background color */
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e74c3c; /* Red button background color */
+    color: #fff; /* Button text color */
+    border: 1px solid #c0392b; /* Button border color */
+    border-radius: 5px; /* Button border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Button box shadow */
+    transition: background-color 0.3s ease;
+}
+
+/* Change button background color on hover */
+.logout-button:hover {
+    background-color: #c0392b; /* Hover background color */
+}
+
+/* Add space between Welcome, Admin and Logout button */
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.welcome {
+    margin-right: 10px; /* Add margin between Welcome, Admin and Logout button */
+}
+
+
+</style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">Sanitary Ware Shop</div>
+        <div class="profile">
+            <!--<img src="path_to_your_profile_picture.jpg" alt="Profile Picture" class="profile-pic">-->
+            <span class="welcome">Welcome, Admin</span>
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+            
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">View Products</a></li>
+            <!--<li><a href="">Add Subcategories</a></li>-->
+            <li><a href="#">Orders</a></li>
+            <li><a href="{% url 'user-list' %}">Users</a></li>
+            <li><a href="#">Sales</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Your content goes here -->
+    
+    </div>
+
+    <div class="footer">
+        &copy; 2023 Online Sanitary Ware Shop. All rights reserved.
+    </div>
+</body>
+
+</html>
