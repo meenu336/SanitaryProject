@@ -159,34 +159,48 @@
       height: 30px; /* Set the desired height for the default image */
     }
    
-    header {
-      background-color: #112418;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-  }
-  .header-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.header-menu li {
-    display: inline-block;
-    margin-right: 10px; /* Adjust the spacing as needed */
-}
-
-.header-menu a {
-    text-decoration: none;
-    color: #fff; /* Adjust the color as needed */
-}
+    /* Updated CSS for the header area */
+    .header_area {
+      width: 100%; /* Full width */
+      background-color: #112418; /* Background color */
+      color: white; /* Text color */
+      text-align: center; /* Align text within the header */
+      padding: 10px 0; /* Adjust padding as needed */
+      position: relative; /* Enable positioning */
+      left: 50%; /* Shift the header to the right by 50% */
+      transform: translateX(-50%); /* Center the header */
+    }
+/* Make header-menu items display horizontally */
 .header-menu {
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: right; /* Align the menu items to the right */
+  display: flex;
+  justify-content: flex-start; /* Align menu items to the right */
+   /* Align items vertically */
 }
 
+.header-menu li {
+  margin-right: 10px; /* Adjust the spacing as needed */
+}
+
+.header-menu a {
+  text-decoration: none;
+  color: #fff; /* Adjust the color as needed */
+}
+
+/* Adjust the main navigation area if necessary */
+.main_menu {
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Align items vertically */
+}
+
+/* Style the logo/brand area if needed */
+.navbar-brand img {
+  max-width: 200px; /* Adjust the width if necessary */
+  height: auto; /* Maintain aspect ratio */
+}
 
 
 
@@ -252,90 +266,10 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                   </li>
               
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item dropdown-toggle" href="#" id="showersDropdown">Showers</a>
-                        <div class="dropdown-menu" aria-labelledby="showersDropdown" id="showerSubCategories">
-                            <a class="dropdown-item" href="{% url 'built_in_showers' %}">Built-in Showers</a>
-                            <a class="dropdown-item" href="{% url 'standalone_showers' %}">Standalone Showers</a>
-                        </div>
-                        <a class="dropdown-item dropdown-toggle" href="#" id="basinsDropdown">Basins</a>
-                        <div class="dropdown-menu" aria-labelledby="basinsDropdown" id="basinsSubCategories">
-                            <a class="dropdown-item" href="{% url 'full_pedestal_basins' %}">Full Pedestal Basins</a>
-                            <a class="dropdown-item" href="{% url 'semi_pedestal_basins' %}">Semi Pedestal Basins</a>
-                        </div>
-                    </div>
-                </li>
                   
-                
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Services</a>
-                    <ul class="dropdown-menu">
-                      <!--<li class="nav-item">
-                        <a class="nav-link" href="blog.html">Services</a>
-                      </li>
-                      <!--<li class="nav-item">
-                        <a class="nav-link" href="single-blog.html">Blog Details</a>
-                      </li>-->
-                    </ul>
-                  </li>
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Career</a>
-                    <ul class="dropdown-menu">
-                      <!--<li class="nav-item">
-                        <a class="nav-link" href="#">Apply now</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="elements.html">Elements</a>
-                      </li>-->
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                  </li>
-                </ul>
-              </div>
 
-              <div class="col-lg-5 pr-0">
-                <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                  <li class="nav-item">
-                    <a href="#" class="icons">
-                      <i class="ti-search" aria-hidden="true"></i>
-                    </a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a href="#" class="icons">
-                      <i class="ti-shopping-cart"></i>
-                    </a>
-                  </li>
-
-                  <a class="nav-link scrollto" href="{% url 'profile' %}" id="usernameDropdown" name="image" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <strong> Welcome, {{ user.username }}</strong> <i class="bi bi-caret-down"></i>
-                    <div class="profile-picture-round">
-                      {% if user_profile.image %}
-                        <!-- Link the profile picture to the profile page -->
-                        <a href="{% url 'profile' %}">
-                          <img src="{{ user_profile.image.url }}" alt="User Profile Picture" class="profile-image  small-profile-image" >
-                        </a>
-                      {% else %}
-                        <!-- Display the default profile picture with a specific size linked to the profile page -->
-                        <a href="{% url 'profile' %}">
-                          <img src="{% static '/img/default image.jpg' %}" alt="Default Profile Picture" class="default-profile-image small-profile-image">
-                        </a>
-                      {% endif %}
-                    </div>
-                  </a>
-
-                  <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="icons" id="logout-link">
-                      <i class="fa fa-power-off"></i>
-                        <!--<i class="ti-heart" aria-hidden="true"></i>-->
-                    </a>
-                  </li>
+                  
+                  
                 </ul>
               </div>
             </div>
@@ -419,107 +353,109 @@
       });
   });
 </script>
-<script>
-const increaseButtons = document.querySelectorAll(".increase-quantity");
-const decreaseButtons = document.querySelectorAll(".decrease-quantity");
-const quantityElements = document.querySelectorAll(".item-quantity");
-const priceElements = document.querySelectorAll(".cart-item-price");
 
-increaseButtons.forEach((button, index) => {
-    button.addEventListener("click", (event) => {
-        event.preventDefault();
-        const currentItem = event.target.closest(".cart-item");
-        const quantityElement = currentItem.querySelector(".item-quantity");
-        const priceElement = currentItem.querySelector(".cart-item-price");
-        const pricePerItem = parseFloat(priceElement.getAttribute("data-price"));
-        const currentQuantity = parseInt(quantityElement.textContent);
-
-        quantityElement.textContent = currentQuantity + 1;
-        updateCartItemPrice(priceElement, pricePerItem, currentQuantity + 1);
-    });
-});
-
-decreaseButtons.forEach((button, index) => {
-    button.addEventListener("click", (event) => {
-        event.preventDefault();
-        const currentItem = event.target.closest(".cart-item");
-        const quantityElement = currentItem.querySelector(".item-quantity");
-        const priceElement = currentItem.querySelector(".cart-item-price");
-        const pricePerItem = parseFloat(priceElement.getAttribute("data-price"));
-        const currentQuantity = parseInt(quantityElement.textContent);
-
-        if (currentQuantity > 1) {
-            quantityElement.textContent = currentQuantity - 1;
-            updateCartItemPrice(priceElement, pricePerItem, currentQuantity - 1);
-        }
-    });
-});
-
-function updateCartItemPrice(priceElement, pricePerItem, quantity) {
-    const totalPrice = (pricePerItem * quantity).toFixed(2);
-    priceElement.textContent = "Rs." + totalPrice;
-}
-</script>
+ 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-
-
-    updateTotalPrice();
-
+document.addEventListener("DOMContentLoaded", function () {
     const increaseButtons = document.querySelectorAll(".increase-quantity");
     const decreaseButtons = document.querySelectorAll(".decrease-quantity");
 
-    increaseButtons.forEach((button, index) => {
+    increaseButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
             event.preventDefault();
             const currentItem = event.target.closest(".cart-item");
             const quantityElement = currentItem.querySelector(".cart-item-quantity");
             const priceElement = currentItem.querySelector(".cart-item-price");
             const pricePerItem = parseFloat(priceElement.getAttribute("data-price"));
-            const currentQuantity = parseInt(quantityElement.textContent);
+            let currentQuantity = parseInt(quantityElement.textContent);
 
-            quantityElement.textContent = currentQuantity + 1;
-            updateCartItemPrice(priceElement, pricePerItem, currentQuantity + 1);
+            currentQuantity++;
+            quantityElement.textContent = currentQuantity;
+
+            const totalPrice = (pricePerItem * currentQuantity).toFixed(2);
+            priceElement.textContent = "Rs" + totalPrice;
+
             updateTotalPrice();
+            saveCartData(); // Save cart data to localStorage after each change
         });
     });
 
-    decreaseButtons.forEach((button, index) => {
+    decreaseButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
             event.preventDefault();
             const currentItem = event.target.closest(".cart-item");
             const quantityElement = currentItem.querySelector(".cart-item-quantity");
             const priceElement = currentItem.querySelector(".cart-item-price");
             const pricePerItem = parseFloat(priceElement.getAttribute("data-price"));
-            const currentQuantity = parseInt(quantityElement.textContent);
+            let currentQuantity = parseInt(quantityElement.textContent);
 
             if (currentQuantity > 1) {
-                quantityElement.textContent = currentQuantity - 1;
-                updateCartItemPrice(priceElement, pricePerItem, currentQuantity - 1);
+                currentQuantity--;
+                quantityElement.textContent = currentQuantity;
+
+                const totalPrice = (pricePerItem * currentQuantity).toFixed(2);
+                priceElement.textContent = "Rs" + totalPrice;
+
                 updateTotalPrice();
+                saveCartData(); // Save cart data to localStorage after each change
             }
         });
     });
 
-    function updateCartItemPrice(priceElement, pricePerItem, quantity) {
+    loadCartData(); // Load cart data from localStorage on page load
+
+    function loadCartData() {
+        const itemElements = document.querySelectorAll(".cart-item");
+
+        itemElements.forEach((itemElement) => {
+            const productId = itemElement.dataset.productId;
+            const quantity = parseInt(localStorage.getItem(productId)) || 1; // Default quantity set to 1
+            updateCartItemQuantity(itemElement, quantity);
+        });
+
+        updateTotalPrice();
+    }
+
+    function updateCartItemQuantity(itemElement, quantity) {
+        const quantityElement = itemElement.querySelector(".cart-item-quantity");
+        const priceElement = itemElement.querySelector(".cart-item-price");
+        const pricePerItem = parseFloat(priceElement.getAttribute("data-price"));
+
+        quantityElement.textContent = quantity;
+
         const totalPrice = (pricePerItem * quantity).toFixed(2);
-        priceElement.innerHTML = "&#8377;" + totalPrice;
+        priceElement.textContent = "Rs" + totalPrice;
     }
 
     function updateTotalPrice() {
+        let total = 0;
         const itemElements = document.querySelectorAll(".cart-item");
 
-        itemElements.forEach(function (itemElement) {
+        itemElements.forEach((itemElement) => {
             const price = parseFloat(itemElement.querySelector(".cart-item-price").getAttribute("data-price"));
             const quantity = parseInt(itemElement.querySelector(".cart-item-quantity").textContent);
             total += price * quantity;
         });
 
         const totalPriceElement = document.getElementById("total-price");
-        totalPriceElement.textContent = total.toFixed(2);
+        totalPriceElement.textContent = "Total Price Rs" + total.toFixed(2);
+    }
+
+    function saveCartData() {
+        const itemElements = document.querySelectorAll(".cart-item");
+
+        itemElements.forEach((itemElement) => {
+            const productId = itemElement.dataset.productId;
+            const quantity = parseInt(itemElement.querySelector(".cart-item-quantity").textContent);
+            localStorage.setItem(productId, quantity);
+        });
     }
 });
 </script>
+
+
+
+
 </body>
 </html>
