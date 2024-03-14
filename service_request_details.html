@@ -16,9 +16,10 @@
     .navbar {
         background-color: #007bff;
         color: #fff;
-        padding: 10px 20px;
+        padding: 20px 180px;
         display: flex;
         justify-content: space-between;
+        width: 100%; 
     }
     
     
@@ -178,7 +179,10 @@
                 <th>Created At</th> <!-- Added column header for created_at field -->
                 <th>Actions</th>
                 <th>Actions</th>
-                <th>Actions</th> <!-- Added an extra Actions column for Delete button -->
+                <th>Actions</th>
+                <th>Actions</th>
+                
+                {% comment %} <th>Actions</th> <!-- Added an extra Actions column for Delete button --> {% endcomment %}
             </tr>
             {% if service_requests %}
                 {% for service_request in service_requests %}
@@ -197,7 +201,7 @@
                         <td>{{ service_request.select_date }}</td>
                         <td>{{ service_request.created_at }}</td> <!-- Display created_at field -->
                         
-                        <td>
+                      <td>
                             <!-- Confirm Button with blue color -->
                             <button onclick="confirmRequest('{{ service_request.id }}')" style="background-color: #007bff; color: #fff;">Confirm</button>
                         </td>
@@ -205,10 +209,38 @@
                             <!-- Reject Button with red color -->
                             <button onclick="rejectRequest('{{ service_request.id }}')" style="background-color: #dc3545; color: #fff;">Reject</button>
                         </td>
+
+                        {% comment %} <td>
+                            <!-- Complete Form -->
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="request_id" value="{{ service_request.id }}">
+                                <button type="submit">Complete</button>
+                            </form>
+                        </td> {% endcomment %}
                         <td>
+                        <form id="complete-form-{{ service_request.id }}" method="post" action="{% url 'complete_service_request' service_request.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="request_id" value="{{ service_request.id }}">
+                            <button type="button" class="complete-btn">Complete</button>
+                        </form>
+                    </td>
+                        
+
+                        <td>
+                            <form method="post" action="{% url 'enter_payment' service_request_id=service_request.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Payment</button>
+                                
+                            </form>
+                            
+                        </td>
+                        
+
+                        {% comment %} <td>
                             <!-- Delete Button -->
                             <button onclick="deleteRequest('{{ service_request.id }}')">Delete</button>
-                        </td>
+                        </td>  {% endcomment %}
                         
                     </tr>
                 {% endfor %}
@@ -221,7 +253,7 @@
     
     </div>
 <!-- service_request_details.html -->
-<script>
+ <script>
     function confirmRequest(requestId) {
         fetch(`/confirm-request/${requestId}/`)
             .then(response => {
@@ -245,7 +277,7 @@
             })
             .catch(error => console.error('Error:', error));
     }
-</script>
+</script> 
 
 
 <script>
@@ -329,6 +361,50 @@
     }
 </script>
 
+<script>
+    // Get the payment button element
+    const paymentButton = document.getElementById('paymentButton');
+    
+    // Add click event listener to the payment button
+    paymentButton.addEventListener('click', function() {
+        // Get the request ID from the button's data attribute
+        const request_id = this.getAttribute('data-request-id');
+        
+        // Redirect the user to the enter_payment page with the request ID
+        window.location.href = `/enter-payment/${request_id}/`;
+    });
+</script>
+
+
+
+
+<script>
+    document.querySelectorAll('.complete-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const formId = button.parentElement.id;
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Handle success (e.g., update UI)
+                    // For example, you can hide or disable the button
+                    button.disabled = true;
+                    button.textContent = 'Completed';
+                } else {
+                    // Handle error
+                    console.error('Failed to complete service request');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
 
 
 </body>
