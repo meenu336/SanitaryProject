@@ -154,7 +154,6 @@
     <table>
         <thead>
             <tr>
-                <th>Job Title</th>
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone number</th>
@@ -173,7 +172,7 @@
         <tbody>
             {% for application in job_applications %}
                 <tr>
-                    <td>{{ application.job_title }}</td>
+                    
                     <td>{{ application.full_name }}</td>
                     <td>{{ application.email }}</td>
                     <td>{{ application.phone}}</td>
