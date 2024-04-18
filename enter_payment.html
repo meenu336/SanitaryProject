@@ -172,7 +172,19 @@
                 <button type="submit">Submit</button>
             </form>
         
-    
+            <script>
+                document.getElementById("amount").addEventListener("keydown", function(event) {
+                    // Allow only digits, decimal point, and backspace
+                    if (!/[\d\.]/.test(event.key) && event.key !== "Backspace") {
+                        event.preventDefault();
+                    }
+                    
+                    // Prevent typing zero as the first character
+                    if (this.value.length === 0 && event.key === "0") {
+                        event.preventDefault();
+                    }
+                });
+            </script>
 
 
 </body>
